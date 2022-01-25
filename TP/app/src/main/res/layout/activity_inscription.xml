@@ -5,9 +5,60 @@
     android:orientation="vertical">
 
     <TextView
+        android:layout_marginTop="60dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="inscription"
-        android:textSize="50dp"
+        android:text="Nom de l'utilisateur"
+        android:textSize="30dp"
         android:layout_gravity="center"/>
+    <EditText
+        android:id="@+id/editNomUtilisateur"
+        android:layout_gravity="center"
+        android:layout_margin="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mot de passe"
+        android:textSize="30dp"
+        android:layout_gravity="center"/>
+    <EditText
+        android:id="@+id/editMotDePasse0"
+        android:layout_gravity="center"
+        android:layout_margin="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"/>
+
+    <TextView
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Confirmer le mot de passe"
+        android:textSize="30dp"
+        android:layout_gravity="center"/>
+
+    <EditText
+        android:id="@+id/editMotDePasse1"
+        android:layout_gravity="center"
+        android:layout_margin="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"/>
+
+
+    <Button
+        android:id="@+id/btnInscription1"
+        android:layout_gravity="center"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@drawable/round_button"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="S'inscrire"
+        android:textSize="11dp"
+        android:textColor="#fff" />
+
 </LinearLayout>

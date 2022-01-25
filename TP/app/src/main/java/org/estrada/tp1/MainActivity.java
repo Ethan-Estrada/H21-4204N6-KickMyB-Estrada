@@ -35,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
         binding.btnInscription.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"Connexion réussie", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(MainActivity.this, Inscription.class));
             }
         });
