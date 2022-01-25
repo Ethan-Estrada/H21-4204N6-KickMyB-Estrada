@@ -56,23 +56,35 @@
             android:inputType="textPassword"/>
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btnConnexion"
-        android:padding="15dp"
-        android:layout_margin="10dp"
-        android:layout_gravity="center"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="#4C4A4A"
-        android:text="Connexion"/>
-    <Button
-        android:id="@+id/btnInscription"
-        android:padding="15dp"
-        android:layout_margin="10dp"
-        android:layout_gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#4C4A4A"
-        android:text="Inscription"/>
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <Button
+            android:layout_margin="20dp"
+            android:id="@+id/btnConnexion"
+            android:layout_gravity="center"
+            android:layout_width="115dp"
+            android:layout_height="115dp"
+            android:background="@drawable/round_button"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="Connexion"
+            android:textSize="11dp"
+            android:textColor="#fff" />
+
+        <Button
+            android:layout_margin="20dp"
+            android:id="@+id/btnInscription"
+            android:layout_gravity="center"
+            android:layout_width="115dp"
+            android:layout_height="115dp"
+            android:background="@drawable/round_button"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="Inscription"
+            android:textSize="11dp"
+            android:textColor="#fff" />
+    </LinearLayout>
 
 </LinearLayout>

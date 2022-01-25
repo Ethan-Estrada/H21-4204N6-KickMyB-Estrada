@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
 
-        setTitle("Activité d'inscription");
+        setTitle("Activité de connexion");
 
         binding.btnConnexion.setOnClickListener(new View.OnClickListener() {
             @Override

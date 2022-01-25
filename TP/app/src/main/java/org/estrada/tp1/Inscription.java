@@ -22,7 +22,7 @@ public class Inscription extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
 
-        setTitle("Activité d'accueil");
+        setTitle("Activité d'inscription");
 
         binding.btnInscription1.setOnClickListener(new View.OnClickListener() {
             @Override
