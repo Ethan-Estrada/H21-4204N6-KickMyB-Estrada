@@ -20,6 +20,8 @@
         </activity>
         <activity android:name=".Accueil"/>
         <activity android:name=".Inscription"/>
+        <activity android:name=".Creation"/>
+        <activity android:name=".Consultation"/>
     </application>
 
 </manifest>

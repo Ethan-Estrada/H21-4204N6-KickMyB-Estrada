@@ -7,7 +7,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import org.estrada.tp1.databinding.ActivityAccueilBinding;
 import org.estrada.tp1.databinding.ActivityInscriptionBinding;
 
 public class Inscription extends AppCompatActivity {
