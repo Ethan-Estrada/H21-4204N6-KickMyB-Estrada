@@ -1,16 +1,21 @@
 package org.estrada.tp1;
 import android.content.Intent;
+import android.icu.util.LocaleData;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.estrada.tp1.databinding.ActivityAccueilBinding;
 
+import java.time.LocalDate;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Random;
 
 public class Accueil extends AppCompatActivity {
@@ -18,6 +23,7 @@ public class Accueil extends AppCompatActivity {
     private ActivityAccueilBinding binding;
     TacheAdapter adapter;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,13 +46,15 @@ public class Accueil extends AppCompatActivity {
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
+
     private void remplirRecycler() {
-        for (int i = 0 ; i < 200 ; i++) {
+        for (int i = 0 ; i < 20 ; i++) {
             Tache t = new Tache();
             Random r = new Random();
             t.Nom = "J'aime pas les papayas  # " + i;
-            Date d = new Date();
-            t.DateLimite = d;
+            LocalDate d = LocalDate.now();
+            t.DateLimite = d.toString();
             t.Pourcentage =  r.nextInt(100);
             t.Temps = r.nextInt(7);
             adapter.list.add(t);
@@ -54,7 +62,7 @@ public class Accueil extends AppCompatActivity {
         adapter.notifyDataSetChanged();
     }
 
-    private void initRecycler(){
+    public void initRecycler(){
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
 

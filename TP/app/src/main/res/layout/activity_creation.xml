@@ -1,11 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <TextView
+        android:layout_marginTop="30dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="creation"/>
+        android:text="Nom de la tache"
+        android:textSize="30dp"
+        android:layout_gravity="center"/>
+    <EditText
+        android:id="@+id/editTache"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30dp"/>
+
+    <CalendarView
+        android:id="@+id/calenderview"
+        android:layout_width="324dp"
+        android:layout_height="307dp"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:background="@drawable/border" />
+
+    <Button
+        android:layout_margin="10dp"
+        android:id="@+id/btnCreer"
+        android:layout_gravity="center"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@drawable/round_button"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="Créer"
+        android:textSize="11dp"
+        android:textColor="#fff" />
 
 </LinearLayout>
