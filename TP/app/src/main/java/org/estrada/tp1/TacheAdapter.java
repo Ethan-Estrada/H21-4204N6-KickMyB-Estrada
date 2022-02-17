@@ -1,5 +1,6 @@
 package org.estrada.tp1;
 
+import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +15,7 @@ import java.util.List;
 
 public class TacheAdapter extends RecyclerView.Adapter<TacheAdapter.MyViewHolder> {
     public List<Tache> list;
-
+    private Context mContext;
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder
@@ -24,8 +25,10 @@ public class TacheAdapter extends RecyclerView.Adapter<TacheAdapter.MyViewHolder
         public TextView tvPourcentage;
         public TextView tvTempsEcouler;
         public TextView tvDateLimite;
+        public LinearLayout parent_layout;
         public MyViewHolder(LinearLayout v) {
             super(v);
+            parent_layout =v.findViewById(R.id.parent_layout);
             tvNom = v.findViewById(R.id.tvNom);
             tvPourcentage = v.findViewById(R.id.tvPourcentage);
             tvTempsEcouler = v.findViewById(R.id.tvTempsEcouler);
@@ -34,8 +37,10 @@ public class TacheAdapter extends RecyclerView.Adapter<TacheAdapter.MyViewHolder
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public TacheAdapter() {
+    public TacheAdapter(Context context) {
         list = new ArrayList<>();
+        mContext = context;
+
     }
 
     // Create new views (invoked by the layout manager)
@@ -56,12 +61,15 @@ public class TacheAdapter extends RecyclerView.Adapter<TacheAdapter.MyViewHolder
         // - replace the contents of the view with that element
         Tache tacheCourante = list.get(position);
 
-
-        holder.tvNom.setOnClickListener(new View.OnClickListener() {
+        holder.parent_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(v.getContext(), Consultation.class);
-                v.getContext().startActivity(i);
+                Intent i = new Intent(mContext, Consultation.class);
+                i.putExtra("Nom tache", tacheCourante.Nom);
+                i.putExtra("Pourcentage", tacheCourante.Pourcentage);
+                i.putExtra("Temps ecouler", tacheCourante.Temps);
+                i.putExtra("Date limite", tacheCourante.DateLimite);
+                mContext.startActivity(i);
             }
         });
 

@@ -71,7 +71,7 @@ public class Accueil extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
         // specify an adapter (see also next example)
-        adapter = new TacheAdapter();
+        adapter = new TacheAdapter(this);
         recyclerView.setAdapter(adapter);
     }
 }
