@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import org.estrada.tp1.databinding.ActivityConsultationBinding;
 
-public class Consultation extends AppCompatActivity {
+public class Consultation extends BaseActivity {
     private ActivityConsultationBinding binding;
     public Integer pourcentage2;
     public Integer jours2;
@@ -66,9 +66,7 @@ public class Consultation extends AppCompatActivity {
 
             setTache(nomTache,pourcentageTache,tempsTache,dateTache);
         }
-
     }
-
     private void setTache(String pNom,Integer pPourcentage,Integer pTemps,String pDate) {
         TextView Nom = binding.txtNomTache;
         Nom.setText(pNom);

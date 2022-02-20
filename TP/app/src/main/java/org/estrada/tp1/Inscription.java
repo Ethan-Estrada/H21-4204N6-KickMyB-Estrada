@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import org.estrada.tp1.databinding.ActivityInscriptionBinding;
 
-public class Inscription extends AppCompatActivity {
+public class Inscription extends AppCompatActivity{
 
     private ActivityInscriptionBinding binding;
 

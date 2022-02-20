@@ -21,7 +21,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Locale;
 
-public class Creation extends Accueil{
+public class Creation extends BaseActivity{
 
     CalendarView calendarView;
     String date;
@@ -37,6 +37,7 @@ public class Creation extends Accueil{
         View view = binding.getRoot();
         setContentView(view);
         setTitle("Activité de création");
+        currentActivity="Creation";
 
         calendarView = (CalendarView) findViewById(R.id.calenderview);
 
@@ -53,7 +54,6 @@ public class Creation extends Accueil{
         t.Temps=0;
         t.Pourcentage=0;
         /// Il faut l'ajouter a la liste de taches de l'utilsateur
-        adapter.list.add(t);
 
 
 
@@ -62,7 +62,7 @@ public class Creation extends Accueil{
             public void onClick(View v) {
                 Intent i = new Intent(Creation.this, Accueil.class);
                 v.getContext().startActivity(i);
-                adapter.notifyDataSetChanged();
+
             }
         });
 

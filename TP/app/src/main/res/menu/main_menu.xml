@@ -1,11 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <item android:id="@+id/item1"
-        android:icon="@drawable/ic_icon"
-        android:title="item 1"
-        app:showAsAction="ifRoom"
-        />
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group>
+        <item
+            android:title="Accueil"
+            android:id="@+id/menuAccueil"
+            android:icon="@drawable/ic_launcher_background"
+            />
+        <item
+            android:title="Ajout de tâche"
+            android:id="@+id/menuAjoutDeTache"
+            android:icon="@drawable/ic_launcher_background"
+ />
+        <item
+            android:title="Déconnexion"
+            android:id="@+id/menuConnexion"
+            android:icon="@drawable/ic_launcher_background"
+             />
+    </group>
 
 </menu>

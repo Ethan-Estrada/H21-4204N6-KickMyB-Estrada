@@ -18,7 +18,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Random;
 
-public class Accueil extends AppCompatActivity {
+public class Accueil extends BaseActivity{
 
     private ActivityAccueilBinding binding;
     TacheAdapter adapter;
@@ -32,6 +32,7 @@ public class Accueil extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
         setTitle("Activité d'accueil");
+        currentActivity= "Accueil";
 
         this.initRecycler();
         this.remplirRecycler();
@@ -49,7 +50,7 @@ public class Accueil extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.O)
 
     private void remplirRecycler() {
-        for (int i = 0 ; i < 20 ; i++) {
+        for (int i = 1 ; i <= 200 ; i++) {
             Tache t = new Tache();
             Random r = new Random();
             t.Nom = "J'aime pas les papayas  # " + i;
