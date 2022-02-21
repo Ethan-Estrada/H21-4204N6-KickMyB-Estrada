@@ -48,21 +48,19 @@ public class Creation extends BaseActivity{
             }
         });
 
-        Tache t = new Tache();
-        t.Nom = binding.editTache.toString();
-        t.DateLimite = date;
-        t.Temps=0;
-        t.Pourcentage=0;
+
         /// Il faut l'ajouter a la liste de taches de l'utilsateur
-
-
+        //Tache t = new Tache();
+        //t.Nom = binding.editTache.toString();
+        //t.DateLimite = date;
+        //t.Temps=0;
+        //t.Pourcentage=0;
 
         binding.btnCreer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Creation.this, Accueil.class);
                 v.getContext().startActivity(i);
-
             }
         });
 

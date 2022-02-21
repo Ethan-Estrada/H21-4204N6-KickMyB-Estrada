@@ -4,17 +4,19 @@
         <item
             android:title="Accueil"
             android:id="@+id/menuAccueil"
-            android:icon="@drawable/ic_launcher_background"
+            android:icon="@drawable/border"
+
             />
         <item
             android:title="Ajout de tâche"
             android:id="@+id/menuAjoutDeTache"
-            android:icon="@drawable/ic_launcher_background"
+            android:icon="@drawable/border"
+
  />
         <item
             android:title="Déconnexion"
             android:id="@+id/menuConnexion"
-            android:icon="@drawable/ic_launcher_background"
+            android:icon="@drawable/border"
              />
     </group>
 

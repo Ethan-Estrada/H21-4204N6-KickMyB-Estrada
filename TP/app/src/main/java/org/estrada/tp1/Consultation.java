@@ -1,5 +1,6 @@
 package org.estrada.tp1;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -24,6 +25,7 @@ public class Consultation extends BaseActivity {
         setContentView(view);
 
         setTitle("Activité de consultation");
+        currentActivity = "Consultation";
         getIncomingIntent();
 
         SeekBar seekBar = binding.seekBar3;
@@ -43,7 +45,6 @@ public class Consultation extends BaseActivity {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
             textPourcentage.setText(String.valueOf(progress +"%"));
             progressBar.setProgress(progress);
-
            }
 
            @Override
@@ -56,6 +57,15 @@ public class Consultation extends BaseActivity {
 
             }
        });
+
+        binding.btnMettreAJour.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Consultation.this, Accueil.class);
+                v.getContext().startActivity(i);
+            }
+        });
+
     }
     private void getIncomingIntent(){
         if(getIntent().hasExtra("Nom tache")&& getIntent().hasExtra("Pourcentage")&&getIntent().hasExtra("Temps ecouler")&&getIntent().hasExtra("Date limite")){

@@ -19,7 +19,7 @@ import com.google.android.material.navigation.NavigationView;
 import org.estrada.tp1.databinding.ActivityBaseBinding;
 
 public class BaseActivity extends AppCompatActivity {
-    public String NomDeUsager;
+    private static String NomDeUsager;
     private ActionBarDrawerToggle abToggle;
     String currentActivity; // Évite la double ouverture d'une activité
     ActivityBaseBinding bindingBase;
@@ -38,8 +38,8 @@ public class BaseActivity extends AppCompatActivity {
                         if (!currentActivity.equals("Accueil")){
                             i = new Intent(BaseActivity.this, Accueil.class);
                             startActivity(i);
+                            break;
                         }
-                        break;
 
                     case (R.id.menuAjoutDeTache):
                         if (!currentActivity.equals("Creation")) {
@@ -52,7 +52,6 @@ public class BaseActivity extends AppCompatActivity {
                             i = new Intent(BaseActivity.this, Connexion.class);
                             startActivity(i);
                             break;
-
                 }
                 return false;
             }
@@ -64,10 +63,12 @@ public class BaseActivity extends AppCompatActivity {
         abToggle = new ActionBarDrawerToggle(this, nv1, R.string.drawer_open, R.string.drawer_closed) {
             @Override
             public void onDrawerOpened(View drawerView) {
+
                 super.onDrawerOpened(drawerView);
                 NavigationView navigationView = (NavigationView) findViewById(R.id.navigationViewID);
                 View headerView = navigationView.getHeaderView(0);
                 TextView navUsager = (TextView) findViewById(R.id.txtViewNavHeader);
+                //// juste un string
                 navUsager.setText(NomDeUsager);
             }
 

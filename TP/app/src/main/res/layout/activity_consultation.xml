@@ -39,7 +39,7 @@
         android:layout_width="400dp"
         android:layout_height="200dp"
         android:layout_gravity="center"
-        android:layout_marginTop="30dp">
+        android:layout_marginTop="20dp">
 
         <ProgressBar
             android:id="@+id/progress_circular"
@@ -69,15 +69,12 @@
             android:max="100"
             android:min="0"
             android:rotation="270" />
-
-
     </FrameLayout>
 
     <TextView
-        android:layout_marginTop="50dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Temps"
+        android:text="Jours"
         android:textSize="20dp"
         android:layout_gravity="center"
         android:gravity="center"/>
@@ -91,7 +88,10 @@
         android:textSize="20dp" />
     <ProgressBar
         android:id="@+id/progress_horizontal"
-        android:layout_margin="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -99,6 +99,17 @@
         android:indeterminate="false"
         android:max="7"
         android:min="0"/>
+
+    <Button
+        android:id="@+id/btnMettreAJour"
+        android:layout_gravity="center"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@drawable/round_button"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="Mettre à jour"
+        android:textSize="11dp"
+        android:textColor="#fff" />
 
 
 </LinearLayout>
