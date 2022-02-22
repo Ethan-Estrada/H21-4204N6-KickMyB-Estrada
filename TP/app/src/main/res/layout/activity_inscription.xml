@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -8,46 +9,53 @@
         android:layout_marginTop="60dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nom de l'utilisateur"
-        android:textSize="30dp"
+        android:text="@string/nomUtilisateur"
+        android:textSize="30sp"
         android:layout_gravity="center"/>
     <EditText
+        android:inputType="text"
+        android:autofillHints="name"
         android:id="@+id/editNomUtilisateur"
         android:layout_gravity="center"
         android:layout_margin="20dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        tools:ignore="LabelFor" />
 
     <TextView
         android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Mot de passe"
-        android:textSize="30dp"
+        android:text="@string/Mdp"
+        android:textSize="30sp"
         android:layout_gravity="center"/>
     <EditText
+        android:autofillHints="password"
         android:id="@+id/editMotDePasse0"
         android:layout_gravity="center"
         android:layout_margin="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textPassword"/>
+        android:inputType="textPassword"
+        tools:ignore="LabelFor" />
 
     <TextView
         android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Confirmer le mot de passe"
-        android:textSize="30dp"
+        android:text="@string/confirmerMdp"
+        android:textSize="30sp"
         android:layout_gravity="center"/>
 
     <EditText
+        android:autofillHints="password"
         android:id="@+id/editMotDePasse1"
         android:layout_gravity="center"
         android:layout_margin="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textPassword"/>
+        android:inputType="textPassword"
+        tools:ignore="LabelFor" />
 
 
     <Button
@@ -57,8 +65,8 @@
         android:layout_height="100dp"
         android:background="@drawable/round_button"
         android:gravity="center_vertical|center_horizontal"
-        android:text="S'inscrire"
-        android:textSize="11dp"
+        android:text="@string/Inscrire"
+        android:textSize="11sp"
         android:textColor="#fff" />
 
 </LinearLayout>

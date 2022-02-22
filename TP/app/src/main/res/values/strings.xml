@@ -2,4 +2,22 @@
     <string name="app_name">TP1</string>
     <string name="drawer_open">Close me</string>
     <string name="drawer_closed">Open me</string>
+    <string name="Nom">Nom</string>
+    <string name="Pourcentage">Pourcentage</string>
+    <string name="TempsEcoulé">Temps écoulé</string>
+    <string name="Date">Date limite</string>
+    <string name="bouton">Botuton</string>
+    <string name="NomTache">Nom de la tache</string>
+    <string name="Jours">Jours</string>
+    <string name="MettreJour">Mettre à jour</string>
+    <string name="Creer">Créer</string>
+    <string name="nomUtilisateur">Nom de l\'utilisateur</string>
+    <string name="Mdp">Mot de passe</string>
+    <string name="Inscrire">S\'inscrire</string>
+    <string name="confirmerMdp">Confirmer le mot de passe</string>
+    <string name="Connexion">Connexion</string>
+    <string name="Inscription">Inscription</string>
+    <string name="Accueil">Accueil</string>
+    <string name="ajoutTache">Ajout de tâche</string>
+    <string name="Deconnexion">Déconnexion</string>
 </resources>

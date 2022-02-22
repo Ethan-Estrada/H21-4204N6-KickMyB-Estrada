@@ -2,22 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group>
         <item
-            android:title="Accueil"
+            android:title="@string/Accueil"
             android:id="@+id/menuAccueil"
-            android:icon="@drawable/border"
-
-            />
+            android:icon="@drawable/border" />
         <item
-            android:title="Ajout de tâche"
+            android:title="@string/ajoutTache"
             android:id="@+id/menuAjoutDeTache"
-            android:icon="@drawable/border"
-
- />
+            android:icon="@drawable/border" />
         <item
-            android:title="Déconnexion"
+            android:title="@string/Deconnexion"
             android:id="@+id/menuConnexion"
-            android:icon="@drawable/border"
-             />
+            android:icon="@drawable/border" />
     </group>
 
 </menu>

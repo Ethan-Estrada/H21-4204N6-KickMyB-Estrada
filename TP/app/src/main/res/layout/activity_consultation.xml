@@ -6,14 +6,14 @@
 
     <TextView
         android:gravity="center"
-        android:textSize="30dp"
+        android:textSize="30sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Nom de la tache"/>
+        android:text="@string/NomTache"/>
     <TextView
         android:id="@+id/txtNomTache"
         android:gravity="center"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <ProgressBar
@@ -24,14 +24,14 @@
     <TextView
         android:layout_marginTop="0dp"
         android:gravity="center"
-        android:textSize="30dp"
+        android:textSize="30sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Date d'echeance"/>
+        android:text="@string/Date"/>
     <TextView
         android:id="@+id/txtDateLimite"
         android:gravity="center"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
@@ -58,13 +58,13 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:textSize="20dp" />
+            android:textSize="20sp" />
 
         <SeekBar
             android:id="@+id/seekBar3"
             android:layout_width="160dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
+            android:layout_gravity="end"
             android:layout_marginTop="90dp"
             android:max="100"
             android:min="0"
@@ -74,8 +74,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Jours"
-        android:textSize="20dp"
+        android:text="@string/Jours"
+        android:textSize="20sp"
         android:layout_gravity="center"
         android:gravity="center"/>
 
@@ -85,7 +85,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
-        android:textSize="20dp" />
+        android:textSize="20sp" />
     <ProgressBar
         android:id="@+id/progress_horizontal"
         android:layout_marginTop="10dp"
@@ -107,8 +107,8 @@
         android:layout_height="100dp"
         android:background="@drawable/round_button"
         android:gravity="center_vertical|center_horizontal"
-        android:text="Mettre à jour"
-        android:textSize="11dp"
+        android:text="@string/MettreJour"
+        android:textSize="11sp"
         android:textColor="#fff" />
 
 
