@@ -13,6 +13,8 @@ import android.widget.Toast;
 import org.estrada.tp1.databinding.ActivityMainBinding;
 import org.estrada.tp1.http.RetrofitUtil;
 import org.estrada.tp1.http.Service;
+import org.estrada.tp1.transfer.SigninRequest;
+import org.estrada.tp1.transfer.SigninResponse;
 import org.estrada.tp1.transfer.SignupRequest;
 
 
@@ -30,7 +32,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class Connexion extends AppCompatActivity {
 
     private ActivityMainBinding binding;
-    private EditText  nomUsager;
+    private EditText nomUsager;
     private EditText motPasse;
 
     @Override
@@ -54,8 +56,6 @@ public class Connexion extends AppCompatActivity {
                 i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 i.putExtra("Nom Usager", nomUsager.getText().toString());
                 getApplicationContext().startActivity(i);
-
-
             }
         });
 
@@ -69,25 +69,19 @@ public class Connexion extends AppCompatActivity {
     }
 
     private void postData(){
-
-
         // passing data from our text fields to our modal class.
-        SignupRequest modal = new SignupRequest();
-        
-        modal.username = nomUsager.getText().toString();
-        modal.password = motPasse.getText().toString();
+        SigninRequest resp = new SigninRequest();
+
+        resp.username = nomUsager.getText().toString();
+        resp.password = motPasse.getText().toString();
 
         // on below line we are executing our method.
         Service service = RetrofitUtil.get();
-         service.signupResponse(modal).enqueue(new Callback<SignupRequest>() {
+         service.signinResponse(resp).enqueue(new Callback<SigninResponse>() {
             @Override
-            public void onResponse(Call<SignupRequest> call, Response<SignupRequest> response) {
-                // this method is called when we get response from our api.
-                Toast.makeText(Connexion.this, "Data added to API", Toast.LENGTH_SHORT).show();
-
+            public void onResponse(Call<SigninResponse> call, Response<SigninResponse> response) {
                 if(response.isSuccessful()){
                     Log.i("RETROFIT",response.code()+"");
-                    Toast.makeText(Connexion.this, "Data added to API", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     // cas d'erreur http 400 404
@@ -96,7 +90,7 @@ public class Connexion extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<SignupRequest> call, Throwable t) {
+            public void onFailure(Call<SigninResponse> call, Throwable t) {
                 Log.i("RETROFIT",t.getMessage());
             }
         });

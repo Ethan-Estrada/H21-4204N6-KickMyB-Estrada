@@ -15,12 +15,12 @@ import retrofit2.http.Path;
 public interface Service {
 
     /// Inscription
-    @POST("/api/id/signin")
-    Call<SignupRequest> signupResponse(@Body SignupRequest request );
+    @POST("/api/id/signup")
+    Call<SigninResponse> signupResponse(@Body SignupRequest request );
 
     /// Connexion
-    @POST("/api/id/signup")
-    Call<SigninRequest> signinResponse(@Path("username") String username,@Path("password") String password );
+    @POST("/api/id/signin")
+    Call<SigninResponse> signinResponse(@Body SigninRequest request );
 
 
 
