@@ -17,7 +17,7 @@ public class RetrofitCookie {
                     .addConverterFactory(ScalarsConverterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(client())
-                    .baseUrl("http://localhost:8080/")
+                    .baseUrl("http://10.0.2.2:8080/")
                     .build();
 
             instance = retrofit.create(ServiceCookie.class);
