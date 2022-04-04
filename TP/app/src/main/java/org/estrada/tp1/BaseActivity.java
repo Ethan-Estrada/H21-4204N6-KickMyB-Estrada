@@ -40,7 +40,6 @@ public class BaseActivity extends AppCompatActivity {
                             startActivity(i);
                             break;
                         }
-
                     case (R.id.menuAjoutDeTache):
                         if (!currentActivity.equals("Creation")) {
                             i = new Intent(BaseActivity.this, Creation.class);
