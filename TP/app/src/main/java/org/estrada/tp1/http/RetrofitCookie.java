@@ -31,7 +31,7 @@ public class RetrofitCookie {
     private static OkHttpClient client() {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        CookieJar jar = (CookieJar) new SessionCookieJar();
+        CookieJar jar = new SessionCookieJar();
         OkHttpClient client = new OkHttpClient.Builder()
                 .cookieJar(jar)
                 .addInterceptor(interceptor)

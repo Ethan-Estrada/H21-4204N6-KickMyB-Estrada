@@ -5,7 +5,6 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -19,7 +18,6 @@ import com.google.android.material.navigation.NavigationView;
 import org.estrada.tp1.databinding.ActivityBaseBinding;
 
 public class BaseActivity extends AppCompatActivity {
-    private static String NomDeUsager;
     private ActionBarDrawerToggle abToggle;
     String currentActivity; // Évite la double ouverture d'une activité
     ActivityBaseBinding bindingBase;
@@ -28,7 +26,9 @@ public class BaseActivity extends AppCompatActivity {
         bindingBase = ActivityBaseBinding.inflate(getLayoutInflater());
         bindingBase.frameLayoutID.addView (view);
         super.setContentView(bindingBase.drawerLayoutID);
-        getIncomingIntent();
+
+        Singleton instance = Singleton.getInstance();
+
         bindingBase.navigationViewID.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -68,7 +68,7 @@ public class BaseActivity extends AppCompatActivity {
                 View headerView = navigationView.getHeaderView(0);
                 TextView navUsager = (TextView) findViewById(R.id.txtViewNavHeader);
                 //// juste un string
-                navUsager.setText(NomDeUsager);
+                navUsager.setText(instance.getText());
             }
 
             @Override
@@ -77,7 +77,7 @@ public class BaseActivity extends AppCompatActivity {
                 NavigationView navigationView = (NavigationView) findViewById(R.id.navigationViewID);
                 View headerView = navigationView.getHeaderView(0);
                 TextView navUsager = (TextView) findViewById(R.id.txtViewNavHeader);
-                navUsager.setText(NomDeUsager);
+                navUsager.setText(instance.getText());
             }
         };
 
@@ -103,12 +103,6 @@ public class BaseActivity extends AppCompatActivity {
         abToggle.onConfigurationChanged(newConfig);
         super.onConfigurationChanged(newConfig);
     }
-    private void getIncomingIntent(){
-        if(getIntent().hasExtra("Nom Usager")){
-            NomDeUsager = getIntent().getStringExtra("Nom Usager");
-        }
-    }
-
 }
 
 

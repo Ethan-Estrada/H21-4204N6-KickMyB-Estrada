@@ -12,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import org.estrada.tp1.databinding.ActivityInscriptionBinding;
 import org.estrada.tp1.http.RetrofitUtil;
 import org.estrada.tp1.http.Service;
-import org.estrada.tp1.transfer.SigninRequest;
 import org.estrada.tp1.transfer.SigninResponse;
 import org.estrada.tp1.transfer.SignupRequest;
 
@@ -64,6 +63,9 @@ public class Inscription extends AppCompatActivity{
         resp.password = motPasse2.getText().toString();
         resp.username = nomUsager.getText().toString();
 
+        Singleton instance = Singleton.getInstance();
+        instance.setText(resp.username);
+
         // on below line we are executing our method.
         Service service = RetrofitUtil.get();
         service.signupResponse(resp).enqueue(new Callback<SigninResponse>() {
@@ -71,6 +73,7 @@ public class Inscription extends AppCompatActivity{
             public void onResponse(Call<SigninResponse> call, Response<SigninResponse> response) {
                 if(response.isSuccessful()){
                     Log.i("RETROFIT",response.code()+"");
+
                 }
                 else {
                     // cas d'erreur http 400 404
