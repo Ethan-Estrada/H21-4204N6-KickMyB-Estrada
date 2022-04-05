@@ -3,6 +3,7 @@ package org.estrada.tp1;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -16,6 +17,14 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.navigation.NavigationView;
 
 import org.estrada.tp1.databinding.ActivityBaseBinding;
+import org.estrada.tp1.http.RetrofitUtil;
+import org.estrada.tp1.http.Service;
+import org.estrada.tp1.transfer.SigninRequest;
+import org.estrada.tp1.transfer.SigninResponse;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class BaseActivity extends AppCompatActivity {
     private ActionBarDrawerToggle abToggle;
@@ -32,24 +41,43 @@ public class BaseActivity extends AppCompatActivity {
         bindingBase.navigationViewID.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Intent i;
+                final Intent[] in = new Intent[1];
                 switch (item.getItemId()){
                     case (R.id.menuAccueil):
                         if (!currentActivity.equals("Accueil")){
-                            i = new Intent(BaseActivity.this, Accueil.class);
-                            startActivity(i);
+                            in[0] = new Intent(BaseActivity.this, Accueil.class);
+                            startActivity(in[0]);
                             break;
                         }
                     case (R.id.menuAjoutDeTache):
                         if (!currentActivity.equals("Creation")) {
-                            i = new Intent(BaseActivity.this, Creation.class);
-                            startActivity(i);
+                            in[0] = new Intent(BaseActivity.this, Creation.class);
+                            startActivity(in[0]);
                             break;
                         }
 
                     case (R.id.menuConnexion):
-                            i = new Intent(BaseActivity.this, Connexion.class);
-                            startActivity(i);
+                        // on below line we are executing our method.
+                        Service service = RetrofitUtil.get();
+                        String r="";
+                        service.signoutResponse(r).enqueue(new Callback<String>() {
+                            @Override
+                            public void onResponse(Call<String> call, Response<String> response) {
+                                if(response.isSuccessful()){
+                                    Log.i("RETROFIT",response.code()+"");
+                                    in[0] = new Intent(BaseActivity.this, Connexion.class);
+                                    startActivity(in[0]);
+                                }
+                                else {
+                                    // cas d'erreur http 400 404
+                                    Log.i("RETROFIT",response.code()+"");
+                                }
+                            }
+                            @Override
+                            public void onFailure(Call<String> call, Throwable t) {
+                                Log.i("RETROFIT",t.getMessage());
+                            }
+                        });
                             break;
                 }
                 return false;

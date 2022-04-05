@@ -25,7 +25,7 @@ public class Connexion extends AppCompatActivity {
     private ActivityMainBinding binding;
     private EditText nomUsager;
     private EditText motPasse;
-    public boolean etatConnexion = false;
+    public boolean etatConnexion =false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,14 +43,16 @@ public class Connexion extends AppCompatActivity {
         binding.btnConnexion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!etatConnexion){
+                    Toast.makeText(getApplicationContext(),"Verification en cours ...", Toast.LENGTH_SHORT).show();
                     postData();
-                    if (etatConnexion == true){
+                }
+                else {
+                    if (etatConnexion){
                         Toast.makeText(getApplicationContext(),"Connexion réussie", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(Connexion.this, Accueil.class));
                     }
-                    else {
-                        Toast.makeText(getApplicationContext(),"Verification en cours ...", Toast.LENGTH_SHORT).show();
-                    }
+                }
             }
         });
 
@@ -82,6 +84,7 @@ public class Connexion extends AppCompatActivity {
                     Log.i("RETROFIT",response.code()+"");
                 }
                 else {
+                    etatConnexion =false;
                     // cas d'erreur http 400 404
                     Log.i("RETROFIT",response.code()+"");
                 }
@@ -89,6 +92,7 @@ public class Connexion extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<SigninResponse> call, Throwable t) {
+                etatConnexion =false;
                 Log.i("RETROFIT",t.getMessage());
             }
         });

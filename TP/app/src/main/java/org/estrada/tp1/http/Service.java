@@ -22,6 +22,8 @@ public interface Service {
     @POST("/api/id/signin")
     Call<SigninResponse> signinResponse(@Body SigninRequest request );
 
-
+    /// Deconnexion
+    @POST("/api/id/signout")
+    Call<String> signoutResponse(@Body String response);
 
 }
