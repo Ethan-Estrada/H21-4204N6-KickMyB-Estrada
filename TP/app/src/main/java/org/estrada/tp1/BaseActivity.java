@@ -17,10 +17,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.navigation.NavigationView;
 
 import org.estrada.tp1.databinding.ActivityBaseBinding;
-import org.estrada.tp1.http.RetrofitUtil;
-import org.estrada.tp1.http.Service;
-import org.estrada.tp1.transfer.SigninRequest;
-import org.estrada.tp1.transfer.SigninResponse;
+import org.estrada.tp1.http.RetrofitCookie;
+import org.estrada.tp1.http.ServiceCookie;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -58,7 +56,7 @@ public class BaseActivity extends AppCompatActivity {
 
                     case (R.id.menuConnexion):
                         // on below line we are executing our method.
-                        Service service = RetrofitUtil.get();
+                        ServiceCookie service = RetrofitCookie.get();
                         String r="";
                         service.signoutResponse(r).enqueue(new Callback<String>() {
                             @Override

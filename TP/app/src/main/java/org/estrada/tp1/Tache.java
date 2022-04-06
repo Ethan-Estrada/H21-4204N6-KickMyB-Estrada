@@ -11,6 +11,6 @@ public class Tache {
 
     public Integer Temps;
 
-    public String DateLimite;
+    public Date DateLimite;
 
 }

@@ -1,5 +1,7 @@
 package org.estrada.tp1.http;
 
+import org.estrada.tp1.CustomGson;
+
 import okhttp3.CookieJar;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -15,7 +17,7 @@ public class RetrofitCookie {
         if(instance == null){
             Retrofit retrofit = new Retrofit.Builder()
                     .addConverterFactory(ScalarsConverterFactory.create())
-                    .addConverterFactory(GsonConverterFactory.create())
+                    .addConverterFactory(GsonConverterFactory.create(CustomGson.getIt()))
                     .client(client())
                     .baseUrl("http://10.0.2.2:8080/")
                     .build();

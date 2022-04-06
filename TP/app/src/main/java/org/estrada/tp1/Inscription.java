@@ -10,8 +10,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.estrada.tp1.databinding.ActivityInscriptionBinding;
-import org.estrada.tp1.http.RetrofitUtil;
-import org.estrada.tp1.http.Service;
+import org.estrada.tp1.http.RetrofitCookie;
+import org.estrada.tp1.http.ServiceCookie;
 import org.estrada.tp1.transfer.SigninResponse;
 import org.estrada.tp1.transfer.SignupRequest;
 
@@ -67,7 +67,7 @@ public class Inscription extends AppCompatActivity{
         instance.setText(resp.username);
 
         // on below line we are executing our method.
-        Service service = RetrofitUtil.get();
+        ServiceCookie service = RetrofitCookie.get();
         service.signupResponse(resp).enqueue(new Callback<SigninResponse>() {
             @Override
             public void onResponse(Call<SigninResponse> call, Response<SigninResponse> response) {

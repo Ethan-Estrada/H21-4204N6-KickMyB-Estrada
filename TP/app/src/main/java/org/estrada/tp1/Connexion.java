@@ -10,8 +10,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import org.estrada.tp1.databinding.ActivityMainBinding;
-import org.estrada.tp1.http.RetrofitUtil;
-import org.estrada.tp1.http.Service;
+import org.estrada.tp1.http.RetrofitCookie;
+import org.estrada.tp1.http.ServiceCookie;
 import org.estrada.tp1.transfer.SigninRequest;
 import org.estrada.tp1.transfer.SigninResponse;
 
@@ -44,7 +44,7 @@ public class Connexion extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (!etatConnexion){
-                    Toast.makeText(getApplicationContext(),"Verification en cours ...", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Verification en cours ...", Toast.LENGTH_LONG).show();
                     postData();
                 }
                 else {
@@ -75,7 +75,7 @@ public class Connexion extends AppCompatActivity {
         instance.setText(resp.username);
 
         // on below line we are executing our method.
-            Service service = RetrofitUtil.get();
+        ServiceCookie service = RetrofitCookie.get();
          service.signinResponse(resp).enqueue(new Callback<SigninResponse>() {
             @Override
             public void onResponse(Call<SigninResponse> call, Response<SigninResponse> response) {

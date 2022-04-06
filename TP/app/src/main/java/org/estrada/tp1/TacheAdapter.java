@@ -68,7 +68,7 @@ public class TacheAdapter extends RecyclerView.Adapter<TacheAdapter.MyViewHolder
                 i.putExtra("Nom tache", tacheCourante.Nom);
                 i.putExtra("Pourcentage", tacheCourante.Pourcentage);
                 i.putExtra("Temps ecouler", tacheCourante.Temps);
-                i.putExtra("Date limite", tacheCourante.DateLimite);
+                i.putExtra("Date limite", tacheCourante.DateLimite.toString());
                 mContext.startActivity(i);
             }
         });
