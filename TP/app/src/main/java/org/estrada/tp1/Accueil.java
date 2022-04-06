@@ -65,6 +65,7 @@ public class Accueil extends BaseActivity{
                 if(response.isSuccessful()){
                     for (int i = 0 ; i < response.body().size(); i++) {
                         Tache t = new Tache();
+                        t.ID = (response.body().get(i).id).intValue();
                         t.Nom = response.body().get(i).name;
                         t.DateLimite = response.body().get(i).deadline;
                         t.Pourcentage = response.body().get(i).percentageDone;

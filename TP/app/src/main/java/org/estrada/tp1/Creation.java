@@ -75,9 +75,9 @@ public class Creation extends BaseActivity{
 
                 // on below line we are executing our method.
                 ServiceCookie service = RetrofitCookie.get();
-                service.addTask(resp).enqueue(new Callback<TaskDetailResponse>() {
+                service.addTask(resp).enqueue(new Callback<String>() {
                     @Override
-                    public void onResponse(Call<TaskDetailResponse> call, Response<TaskDetailResponse> response) {
+                    public void onResponse(Call<String> call, Response<String> response) {
                         if(response.isSuccessful()){
                             startActivity(new Intent(Creation.this, Accueil.class));
                             Log.i("RETROFIT",response.code()+"");
@@ -88,7 +88,7 @@ public class Creation extends BaseActivity{
                         }
                     }
                     @Override
-                    public void onFailure(Call<TaskDetailResponse> call, Throwable t) {
+                    public void onFailure(Call<String> call, Throwable t) {
                         Log.i("RETROFIT",t.getMessage());
                     }
                 });

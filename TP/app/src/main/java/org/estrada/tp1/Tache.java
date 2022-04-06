@@ -5,6 +5,8 @@ import java.util.Date;
 
 public class Tache {
 
+    public Integer ID;
+
     public String Nom;
 
     public Integer Pourcentage;

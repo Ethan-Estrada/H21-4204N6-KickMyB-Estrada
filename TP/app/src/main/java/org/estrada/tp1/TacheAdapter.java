@@ -25,6 +25,7 @@ public class TacheAdapter extends RecyclerView.Adapter<TacheAdapter.MyViewHolder
         public TextView tvPourcentage;
         public TextView tvTempsEcouler;
         public TextView tvDateLimite;
+        public TextView tvTacheID;
         public LinearLayout parent_layout;
         public MyViewHolder(LinearLayout v) {
             super(v);
@@ -33,6 +34,7 @@ public class TacheAdapter extends RecyclerView.Adapter<TacheAdapter.MyViewHolder
             tvPourcentage = v.findViewById(R.id.tvPourcentage);
             tvTempsEcouler = v.findViewById(R.id.tvTempsEcouler);
             tvDateLimite = v.findViewById(R.id.tvDateLimite);
+            tvTacheID = v.findViewById(R.id.tvTacheID);
         }
     }
 
@@ -40,7 +42,6 @@ public class TacheAdapter extends RecyclerView.Adapter<TacheAdapter.MyViewHolder
     public TacheAdapter(Context context) {
         list = new ArrayList<>();
         mContext = context;
-
     }
 
     // Create new views (invoked by the layout manager)
@@ -69,6 +70,8 @@ public class TacheAdapter extends RecyclerView.Adapter<TacheAdapter.MyViewHolder
                 i.putExtra("Pourcentage", tacheCourante.Pourcentage);
                 i.putExtra("Temps ecouler", tacheCourante.Temps);
                 i.putExtra("Date limite", tacheCourante.DateLimite.toString());
+                i.putExtra("ID",tacheCourante.ID);
+
                 mContext.startActivity(i);
             }
         });
@@ -77,6 +80,7 @@ public class TacheAdapter extends RecyclerView.Adapter<TacheAdapter.MyViewHolder
         holder.tvPourcentage.setText(""+tacheCourante.Pourcentage+"%"); // TODO setText sur un integer crash
         holder.tvTempsEcouler.setText(""+tacheCourante.Temps+" / 7");
         holder.tvDateLimite.setText(""+tacheCourante.DateLimite);
+        holder.tvTacheID.setText(""+tacheCourante.ID);
     }
 
     // renvoie la taille de la liste

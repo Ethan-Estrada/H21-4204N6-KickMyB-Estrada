@@ -73,7 +73,6 @@ public class Inscription extends AppCompatActivity{
             public void onResponse(Call<SigninResponse> call, Response<SigninResponse> response) {
                 if(response.isSuccessful()){
                     Log.i("RETROFIT",response.code()+"");
-
                 }
                 else {
                     // cas d'erreur http 400 404

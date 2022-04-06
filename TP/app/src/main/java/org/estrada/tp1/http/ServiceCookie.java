@@ -17,8 +17,7 @@ import retrofit2.http.Path;
 
 public interface ServiceCookie {
     // requetes a faires avec des cookies
-    @GET("/api/**")
-    Call<String> cookieEcho();
+
 
     /// Inscription
     @POST("/api/id/signup")
@@ -34,13 +33,18 @@ public interface ServiceCookie {
 
     // Add Task
     @POST("/api/add")
-    Call<TaskDetailResponse> addTask(@Body AddTaskRequest request);
+    Call<String> addTask(@Body AddTaskRequest request);
 
     // Get TaskList
     @GET("/api/home")
     Call<List<HomeItemResponse>> getTaskList();
 
     // Recup Detail Tache
-    @GET("")
+    @GET("/api/detail/{id}")
+    Call<TaskDetailResponse> detailResponse(@Path("id") Long id);
+
+    // Recup valeur avancement
+    @GET("/api/progress/{id}/{valeur}")
+    Call<String> avancementResponse(@Path("id") Long id, @Path("valeur") Integer progress);
 
 }
