@@ -15,14 +15,9 @@ import org.estrada.tp1.databinding.ActivityCreationBinding;
 import org.estrada.tp1.http.RetrofitCookie;
 import org.estrada.tp1.http.ServiceCookie;
 import org.estrada.tp1.transfer.AddTaskRequest;
-import org.estrada.tp1.transfer.TaskDetailResponse;
-import org.joda.time.LocalDate;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
-import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -52,14 +47,11 @@ public class Creation extends BaseActivity{
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
-                date1 = year + "/" +month+ "/" + dayOfMonth;
+                date1 = year + "/" +(month +1)+ "/" + dayOfMonth;
                 SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
                 try {
                     Date dateTemp = formatter.parse(date1);
-                    SimpleDateFormat formatter1 = new SimpleDateFormat("ddMMyyyy");
-                    String l = formatter1.format(dateTemp);
-                    Date d = formatter1.parse(l);
-                    dateFinale = d;
+                    dateFinale = dateTemp;
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }

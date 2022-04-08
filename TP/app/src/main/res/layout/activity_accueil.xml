@@ -18,7 +18,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="ID" />
+                android:text="@string/id2" />
 
             <TextView
                 android:id="@+id/tvNom"
@@ -36,7 +36,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:textSize="13dp"
+                android:textSize="13sp"
                 android:text="@string/Pourcentage"/>
 
             <TextView

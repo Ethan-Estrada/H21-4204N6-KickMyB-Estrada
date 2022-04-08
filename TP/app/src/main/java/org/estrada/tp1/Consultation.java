@@ -1,6 +1,7 @@
 package org.estrada.tp1;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -8,14 +9,15 @@ import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import androidx.annotation.RequiresApi;
+
 import org.estrada.tp1.databinding.ActivityConsultationBinding;
 import org.estrada.tp1.http.RetrofitCookie;
 import org.estrada.tp1.http.ServiceCookie;
-import org.estrada.tp1.transfer.HomeItemResponse;
 import org.estrada.tp1.transfer.TaskDetailResponse;
 
 import java.util.Date;
-import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -51,9 +53,26 @@ public class Consultation extends BaseActivity {
         // on below line we are executing our method.
         ServiceCookie service = RetrofitCookie.get();
         service.detailResponse(idTask.longValue()).enqueue(new Callback<TaskDetailResponse>() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onResponse(Call<TaskDetailResponse> call, Response<TaskDetailResponse> response) {
                 if(response.isSuccessful()){
+
+                    // Nombre de jours entre today et la datelimite
+                    Date aujDate = new Date();
+                    Date Finale = response.body().deadline;
+                    Long joursAuj = Finale.getTime()-aujDate.getTime();
+                    Long joursRestant =  TimeUnit.DAYS.convert(joursAuj, TimeUnit.MILLISECONDS);
+                    // Le Calcul
+                    Long jourPasser = (response.body().percentageTimeSpent * joursRestant) / (100 - response.body().percentageTimeSpent);
+                    Long jourTotaux = joursRestant + jourPasser;
+                    // Set la progressbarHori des jours
+                    progressBarHori.setMin(0);
+                    progressBarHori.setProgress((jourPasser).intValue());
+                    progressBarHori.setMax((jourTotaux).intValue());
+                    textJours.setText(jourPasser+"J / "+ jourTotaux+"J");
+
+                    // set les donnees de la tache
                     String nomRecu = response.body().name;
                     Integer pourcentageRecu = response.body().percentageDone;
                     Integer joursFaitRecu = response.body().percentageTimeSpent;
@@ -62,12 +81,9 @@ public class Consultation extends BaseActivity {
                     setTache(nomRecu,pourcentageRecu,joursFaitRecu,deadlineRecu.toString(),idRecu.toString());
 
                     // set donnees pour les bars
-                    textJours.setText(jours2 +" / 7");
-                    progressBarHori.setProgress(jours2);
                     textPourcentage.setText(pourcentage2+"%");
                     progressBar.setProgress(pourcentage2);
                     seekBar.setProgress(pourcentage2);
-
                     seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
                         @Override
                         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {

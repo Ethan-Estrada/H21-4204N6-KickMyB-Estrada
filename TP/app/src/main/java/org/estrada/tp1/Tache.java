@@ -11,7 +11,7 @@ public class Tache {
 
     public Integer Pourcentage;
 
-    public Integer Temps;
+    public Integer TimeSpent;
 
     public Date DateLimite;
 

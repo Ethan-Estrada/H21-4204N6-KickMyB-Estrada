@@ -11,7 +11,9 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class TacheAdapter extends RecyclerView.Adapter<TacheAdapter.MyViewHolder> {
     public List<Tache> list;
@@ -68,7 +70,7 @@ public class TacheAdapter extends RecyclerView.Adapter<TacheAdapter.MyViewHolder
                 Intent i = new Intent(mContext, Consultation.class);
                 i.putExtra("Nom tache", tacheCourante.Nom);
                 i.putExtra("Pourcentage", tacheCourante.Pourcentage);
-                i.putExtra("Temps ecouler", tacheCourante.Temps);
+                i.putExtra("Temps ecouler", tacheCourante.TimeSpent);
                 i.putExtra("Date limite", tacheCourante.DateLimite.toString());
                 i.putExtra("ID",tacheCourante.ID);
 
@@ -76,9 +78,19 @@ public class TacheAdapter extends RecyclerView.Adapter<TacheAdapter.MyViewHolder
             }
         });
 
+        // Nombre de jours entre today et la datelimite
+        Date aujDate = new Date();
+        Date Finale = tacheCourante.DateLimite;
+        Long joursAuj = Finale.getTime()-aujDate.getTime();
+        Long joursRestant =  TimeUnit.DAYS.convert(joursAuj, TimeUnit.MILLISECONDS);
+        // Le Calcul
+        Long jourPasser = (tacheCourante.TimeSpent * joursRestant) / (100 - tacheCourante.TimeSpent);
+        Long jourTotaux = joursRestant + jourPasser;
+
+
         holder.tvNom.setText(tacheCourante.Nom);
         holder.tvPourcentage.setText(""+tacheCourante.Pourcentage+"%"); // TODO setText sur un integer crash
-        holder.tvTempsEcouler.setText(""+tacheCourante.Temps+" / 7");
+        holder.tvTempsEcouler.setText(jourPasser+"J / "+ jourTotaux+"J");
         holder.tvDateLimite.setText(""+tacheCourante.DateLimite);
         holder.tvTacheID.setText(""+tacheCourante.ID);
     }

@@ -1,14 +1,14 @@
 package org.estrada.tp1;
 import android.content.Intent;
-import android.icu.util.LocaleData;
+
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
+
 
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
+
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,14 +16,8 @@ import org.estrada.tp1.databinding.ActivityAccueilBinding;
 import org.estrada.tp1.http.RetrofitCookie;
 import org.estrada.tp1.http.ServiceCookie;
 import org.estrada.tp1.transfer.HomeItemResponse;
-import org.estrada.tp1.transfer.SigninRequest;
-import org.estrada.tp1.transfer.SigninResponse;
 
-import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
-import java.util.Random;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -69,7 +63,7 @@ public class Accueil extends BaseActivity{
                         t.Nom = response.body().get(i).name;
                         t.DateLimite = response.body().get(i).deadline;
                         t.Pourcentage = response.body().get(i).percentageDone;
-                        t.Temps = response.body().get(i).percentageTimeSpent;
+                        t.TimeSpent = response.body().get(i).percentageTimeSpent;
                         adapter.list.add(t);
                     }
                         adapter.notifyDataSetChanged();
