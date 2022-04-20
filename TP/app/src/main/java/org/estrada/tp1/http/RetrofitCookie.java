@@ -27,7 +27,6 @@ public class RetrofitCookie {
         }else {
             return instance;
         }
-
     }
 
     private static OkHttpClient client() {
