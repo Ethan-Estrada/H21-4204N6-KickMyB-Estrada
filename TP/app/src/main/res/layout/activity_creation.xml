@@ -1,48 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_marginTop="30dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/NomTache"
-        android:textSize="30sp"
-        android:layout_gravity="center"/>
-    <EditText
-        android:inputType="text"
-        android:id="@+id/editTache"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="20dp"
-        android:layout_gravity="center"
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="30sp"
-        android:importantForAutofill="no"
-        tools:ignore="LabelFor" />
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:text="@string/NomTache"
+            android:textSize="30sp" />
 
-    <CalendarView
-        android:id="@+id/calenderview"
-        android:layout_width="324dp"
-        android:layout_height="307dp"
-        android:layout_gravity="center"
-        android:layout_margin="10dp"
-        android:background="@drawable/border" />
+        <EditText
+            android:hint="@string/NomTache"
+            android:id="@+id/editTache"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:textSize="30sp" />
 
-    <Button
-        android:layout_margin="10dp"
-        android:id="@+id/btnCreer"
-        android:layout_gravity="center"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:background="@drawable/round_button"
-        android:gravity="center_vertical|center_horizontal"
-        android:text="@string/Creer"
-        android:textSize="11sp"
-        android:textColor="#fff" />
+        <CalendarView
+            android:id="@+id/calenderview"
+            android:layout_width="324dp"
+            android:layout_height="307dp"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:background="@drawable/border" />
 
-</LinearLayout>
+        <Button
+            android:id="@+id/btnCreer"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:background="@drawable/round_button"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="@string/Creer"
+            android:textColor="#fff"
+            android:textSize="11sp" />
+    </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
