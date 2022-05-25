@@ -2,6 +2,7 @@ package org.estrada.tp1;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -25,7 +26,7 @@ public class Inscription extends AppCompatActivity{
     private EditText nomUsager;
     private EditText motPasse2;
     private EditText motPasse1;
-
+    final LoadingDialog loadingDialog = new LoadingDialog(Inscription.this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,12 +48,23 @@ public class Inscription extends AppCompatActivity{
                 //verif mdp
                 if (motPasse2.getText().toString().equals(motPasse1.getText().toString()))
                 {
+
+                    loadingDialog.startLoadingDialog();
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            loadingDialog.dismissDialog();
+                        }
+                    },3000);
                     postdata();
                     Toast.makeText(getApplicationContext(),"Inscription réussie !", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(Inscription.this, Accueil.class));
                 }
                 else {
                     Toast.makeText(getApplicationContext(),"mdp non pareil", Toast.LENGTH_SHORT).show();
+
+
                 }
             }
         });
@@ -73,19 +85,22 @@ public class Inscription extends AppCompatActivity{
             public void onResponse(Call<SigninResponse> call, Response<SigninResponse> response) {
                 if(response.isSuccessful()){
                     Log.i("RETROFIT",response.code()+"");
+                    binding.btnInscription1.setEnabled(true);
                 }
                 else {
                     // cas d'erreur http 400 404
                     Log.i("RETROFIT",response.code()+"");
+                    binding.btnInscription1.setEnabled(true);
                 }
             }
 
             @Override
             public void onFailure(Call<SigninResponse> call, Throwable t) {
                 Log.i("RETROFIT",t.getMessage());
+                binding.btnInscription1.setEnabled(true);
             }
         });
-
+        binding.btnInscription1.setEnabled(false);
     }
 }
 

@@ -3,6 +3,7 @@ package org.estrada.tp1;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.CalendarView;
@@ -27,6 +28,7 @@ public class Creation extends BaseActivity{
     CalendarView calendarView;
     String date1;
     Date dateFinale;
+    final LoadingDialog loadingDialog = new LoadingDialog(Creation.this);
 
     private ActivityCreationBinding binding;
 
@@ -61,6 +63,15 @@ public class Creation extends BaseActivity{
         binding.btnCreer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                loadingDialog.startLoadingDialog();
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        loadingDialog.dismissDialog();
+                    }
+                },3000);
+
                 AddTaskRequest resp = new AddTaskRequest();
                 resp.name = nomTask.getText().toString();
                 resp.deadline = dateFinale;
@@ -73,17 +84,21 @@ public class Creation extends BaseActivity{
                         if(response.isSuccessful()){
                             startActivity(new Intent(Creation.this, Accueil.class));
                             Log.i("RETROFIT",response.code()+"");
+                            binding.btnCreer.setEnabled(true);
                         }
                         else {
                             // cas d'erreur http 400 404
                             Log.i("RETROFIT",response.code()+"");
+                            binding.btnCreer.setEnabled(true);
                         }
                     }
                     @Override
                     public void onFailure(Call<String> call, Throwable t) {
                         Log.i("RETROFIT",t.getMessage());
+                        binding.btnCreer.setEnabled(true);
                     }
                 });
+                binding.btnCreer.setEnabled(false);
             }
         });
 

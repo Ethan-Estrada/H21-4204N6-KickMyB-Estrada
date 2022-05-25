@@ -3,6 +3,7 @@ package org.estrada.tp1;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -29,7 +30,7 @@ public class Consultation extends BaseActivity {
     public Integer jours2;
     public Integer idTask;
     public Long idRecu;
-    public Integer progression;
+    public Integer progression = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,8 @@ public class Consultation extends BaseActivity {
         binding = ActivityConsultationBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
+        final LoadingDialog loadingDialog = new LoadingDialog(Consultation.this);
+
 
         setTitle("Activité de consultation");
         currentActivity = "Consultation";
@@ -51,6 +54,14 @@ public class Consultation extends BaseActivity {
         ProgressBar progressBar = binding.progressCircular;
 
         // on below line we are executing our method.
+        loadingDialog.startLoadingDialog();
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                loadingDialog.dismissDialog();
+            }
+        },3000);
         ServiceCookie service = RetrofitCookie.get();
         service.detailResponse(idTask.longValue()).enqueue(new Callback<TaskDetailResponse>() {
             @RequiresApi(api = Build.VERSION_CODES.O)
@@ -115,7 +126,16 @@ public class Consultation extends BaseActivity {
         binding.btnMettreAJour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if ( progression >0 && progression <100){
+                loadingDialog.startLoadingDialog();
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        loadingDialog.dismissDialog();
+                    }
+                },3000);
+
+                if ( progression >0  && progression < 100){
                     ServiceCookie service = RetrofitCookie.get();
                     service.avancementResponse(idRecu,progression).enqueue(new Callback<String>() {
                         @Override
@@ -124,17 +144,21 @@ public class Consultation extends BaseActivity {
                                 Intent i = new Intent(Consultation.this, Accueil.class);
                                 v.getContext().startActivity(i);
                                 Log.i("RETROFIT",response.code()+"");
+                                binding.btnMettreAJour.setEnabled(true);
                             }
                             else {
                                 // cas d'erreur http 400 404
                                 Log.i("RETROFIT",response.code()+"");
+                                binding.btnMettreAJour.setEnabled(true);
                             }
                         }
                         @Override
                         public void onFailure(Call<String> call, Throwable t) {
                             Log.i("RETROFIT",t.getMessage());
+                            binding.btnMettreAJour.setEnabled(true);
                         }
                     });
+                    binding.btnMettreAJour.setEnabled(false);
                 }
             }
         });

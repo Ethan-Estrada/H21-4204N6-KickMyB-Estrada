@@ -3,14 +3,19 @@ import android.content.Intent;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import org.estrada.tp1.databinding.ActivityAccueilBinding;
 import org.estrada.tp1.http.RetrofitCookie;
@@ -27,6 +32,8 @@ public class Accueil extends BaseActivity{
 
     private ActivityAccueilBinding binding;
     TacheAdapter adapter;
+    final LoadingDialog loadingDialog = new LoadingDialog(Accueil.this);
+
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -40,8 +47,15 @@ public class Accueil extends BaseActivity{
         currentActivity= "Accueil";
 
         this.initRecycler();
+        loadingDialog.startLoadingDialog();
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                loadingDialog.dismissDialog();
+            }
+        },3000);
         this.remplirRecycler();
-
         binding.floatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,6 +95,7 @@ public class Accueil extends BaseActivity{
         });
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public void initRecycler(){
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
@@ -92,6 +107,25 @@ public class Accueil extends BaseActivity{
         // specify an adapter (see also next example)
         adapter = new TacheAdapter(this);
         recyclerView.setAdapter(adapter);
+
+        binding.swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Snackbar snackbar = Snackbar
+                        .make(binding.getRoot(),"Loading ...", 3000);
+                snackbar.show();
+
+                initRecycler();
+                remplirRecycler();
+                new Handler().postDelayed(new Runnable() {
+                    @Override public void run() {
+                        // Stop animation (This will be after 3 seconds)
+                        binding.swipeRefreshLayout.setRefreshing(false);
+                    }
+                }, 3000); // Delay in millis
+
+            }
+        });
     }
 }
 
