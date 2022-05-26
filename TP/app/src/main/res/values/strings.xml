@@ -1,5 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">TP1</string>
+    <string name="app_name">TP3</string>
     <string name="drawer_open">Close me</string>
     <string name="drawer_closed">Open me</string>
     <string name="Nom">Nom</string>
@@ -12,15 +13,31 @@
     <string name="MettreJour">Mettre à jour</string>
     <string name="Creer">Créer</string>
     <string name="nomUtilisateur">Nom de l\'utilisateur</string>
-    <string name="Mdp">Mot de passe</string>
+    <string name="Mdp">Password</string>
     <string name="Inscrire">S\'inscrire</string>
     <string name="confirmerMdp">Confirmer le mot de passe</string>
     <string name="Connexion">Connexion</string>
     <string name="Inscription">Inscription</string>
+    <string name="InscriptionReussie">Inscription réussie !</string>
     <string name="Accueil">Accueil</string>
     <string name="ajoutTache">Ajout de tâche</string>
     <string name="Deconnexion">Déconnexion</string>
     <string name="id">ID : </string>
     <string name="id2">ID</string>
+    <string name="loadingfr">Chargement ...</string>
     <string name="mot_de_passe">Mot de passe</string>
+    <string name="activité_ac">Activité d\'accueil</string>
+    <string name="activité_consult">Activité de consultation</string>
+    <string name="activité_co">Activité de connexion</string>
+    <string name="activité_ins">Activité d\'inscription</string>
+    <string name="co_reussie">Connexion réussie</string>
+    <string name="er_nameDejaPris">Le nom de l\'utilisateur est déjà pris</string>
+    <string name="er_mdpCourt">Mot de passe trop court</string>
+    <string name="er_403">l\'utilisateur n\'est plus authentifié ou a été déconnecté</string>
+    <string name="er_usernameCourt">Nom de l\'utilisateur trop court</string>
+    <string name="er_mdpNonPareil">Les mots de passes ne sont pas semblables</string>
+    <string name="er_badCredentials">Nom de l\'utilisateur ou le mot de passe érroné</string>
+    <string name="er_internalAuthentification">Impossible de communiquer avec le serveur</string>
+    <string name="er_dataIntegrity">Les données fournies sont incompatibles avec le serveur</string>
+    <string name="er_pasInternet">Pas de connection internet</string>
 </resources>

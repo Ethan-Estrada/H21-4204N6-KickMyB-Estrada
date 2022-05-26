@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 
@@ -17,6 +18,7 @@ import org.estrada.tp1.http.RetrofitCookie;
 import org.estrada.tp1.http.ServiceCookie;
 import org.estrada.tp1.transfer.TaskDetailResponse;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
@@ -42,7 +44,7 @@ public class Consultation extends BaseActivity {
         final LoadingDialog loadingDialog = new LoadingDialog(Consultation.this);
 
 
-        setTitle("Activité de consultation");
+        setTitle(R.string.activité_consult);
         currentActivity = "Consultation";
         getIncomingIntent();
 
@@ -51,7 +53,7 @@ public class Consultation extends BaseActivity {
         TextView textPourcentage = binding.textePourcentage;
         TextView textJours = binding.txtJours;
         ProgressBar progressBarHori = binding.progressHorizontal;
-        ProgressBar progressBar = binding.progressCircular;
+        ProgressBar progressCircular = binding.progressCircular;
 
         // on below line we are executing our method.
         loadingDialog.startLoadingDialog();
@@ -93,13 +95,13 @@ public class Consultation extends BaseActivity {
 
                     // set donnees pour les bars
                     textPourcentage.setText(pourcentage2+"%");
-                    progressBar.setProgress(pourcentage2);
-                    seekBar.setProgress(pourcentage2);
+                    progressCircular.setProgress(pourcentageRecu);
+                    seekBar.setProgress(pourcentageRecu);
                     seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
                         @Override
                         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                             textPourcentage.setText(String.valueOf(progress +"%"));
-                            progressBar.setProgress(progress);
+                            progressCircular.setProgress(progress);
                             progression = progress;
                         }
                         @Override
@@ -115,11 +117,18 @@ public class Consultation extends BaseActivity {
                 else {
                     // cas d'erreur http 400 404
                     Log.i("RETROFIT",response.code()+"");
+
                 }
             }
             @Override
             public void onFailure(Call<TaskDetailResponse> call, Throwable t) {
                 Log.i("RETROFIT",t.getMessage());
+                String corpsErreur = t.getMessage();
+                if (corpsErreur!=null) {
+                    if (corpsErreur.contains("Unable to resolve host")) {
+                        Toast.makeText(getApplicationContext(), R.string.er_pasInternet, Toast.LENGTH_LONG).show();
+                    }
+                }
             }
         });
 
@@ -148,6 +157,26 @@ public class Consultation extends BaseActivity {
                             }
                             else {
                                 // cas d'erreur http 400 404
+                                try {
+                                    String statusErreur = response.code()+"";
+                                    String corpsErreur = response.errorBody().string();
+                                    if (corpsErreur!=null) {
+                                        if (corpsErreur.contains("InternalAuthenticationServiceException")) {
+                                            Toast.makeText(getApplicationContext(),R.string.er_internalAuthentification, Toast.LENGTH_SHORT).show();
+                                        }
+                                        else if (corpsErreur.contains("DataIntegrityViolationException")) {
+                                            Toast.makeText(getApplicationContext(),R.string.er_dataIntegrity, Toast.LENGTH_SHORT).show();
+                                        }
+                                        else if (statusErreur.contains("403") ) {
+                                            Toast.makeText(getApplicationContext(),"l'utilisateur n'est plus authentifié ou a été déconnecté", Toast.LENGTH_SHORT).show();
+                                        }
+                                        else{
+                                            Toast.makeText(getApplicationContext(),corpsErreur, Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
                                 Log.i("RETROFIT",response.code()+"");
                                 binding.btnMettreAJour.setEnabled(true);
                             }
@@ -155,6 +184,12 @@ public class Consultation extends BaseActivity {
                         @Override
                         public void onFailure(Call<String> call, Throwable t) {
                             Log.i("RETROFIT",t.getMessage());
+                            String corpsErreur = t.getMessage();
+                            if (corpsErreur!=null) {
+                                if (corpsErreur.contains("Unable to resolve host")) {
+                                    Toast.makeText(getApplicationContext(), "Pas de connection internet", Toast.LENGTH_LONG).show();
+                                }
+                            }
                             binding.btnMettreAJour.setEnabled(true);
                         }
                     });

@@ -16,6 +16,8 @@ import org.estrada.tp1.http.ServiceCookie;
 import org.estrada.tp1.transfer.SigninResponse;
 import org.estrada.tp1.transfer.SignupRequest;
 
+import java.io.IOException;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -36,7 +38,7 @@ public class Inscription extends AppCompatActivity{
         View view = binding.getRoot();
         setContentView(view);
 
-        setTitle("Activité d'inscription");
+        setTitle(R.string.activité_ins);
 
         nomUsager = binding.editNomUtilisateur;
         motPasse1 = binding.editMotDePasse0;
@@ -45,10 +47,11 @@ public class Inscription extends AppCompatActivity{
         binding.btnInscription1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 //verif mdp
                 if (motPasse2.getText().toString().equals(motPasse1.getText().toString()))
                 {
-
+                    postdata();
                     loadingDialog.startLoadingDialog();
                     Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
@@ -57,14 +60,9 @@ public class Inscription extends AppCompatActivity{
                             loadingDialog.dismissDialog();
                         }
                     },3000);
-                    postdata();
-                    Toast.makeText(getApplicationContext(),"Inscription réussie !", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(Inscription.this, Accueil.class));
                 }
                 else {
-                    Toast.makeText(getApplicationContext(),"mdp non pareil", Toast.LENGTH_SHORT).show();
-
-
+                    Toast.makeText(getApplicationContext(),R.string.er_mdpNonPareil, Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -85,17 +83,47 @@ public class Inscription extends AppCompatActivity{
             public void onResponse(Call<SigninResponse> call, Response<SigninResponse> response) {
                 if(response.isSuccessful()){
                     Log.i("RETROFIT",response.code()+"");
+                    Toast.makeText(getApplicationContext(),R.string.InscriptionReussie, Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(Inscription.this, Accueil.class));
                     binding.btnInscription1.setEnabled(true);
                 }
                 else {
-                    // cas d'erreur http 400 404
-                    Log.i("RETROFIT",response.code()+"");
+                    try {
+                        String corpsErreur = response.errorBody().string();
+                        if (corpsErreur!=null) {
+                            if (corpsErreur.contains("UsernameTooShort")) {
+                                Toast.makeText(getApplicationContext(),R.string.er_usernameCourt, Toast.LENGTH_SHORT).show();
+                            }
+                            else if (corpsErreur.contains("PasswordTooShort")) {
+                                Toast.makeText(getApplicationContext(),R.string.er_mdpCourt, Toast.LENGTH_SHORT).show();
+                            }
+                            else if (corpsErreur.contains("InternalAuthenticationServiceException")) {
+                                Toast.makeText(getApplicationContext(),R.string.er_internalAuthentification, Toast.LENGTH_SHORT).show();
+                            }
+                            else if (corpsErreur.contains("DataIntegrityViolationException")) {
+                                Toast.makeText(getApplicationContext(),R.string.er_dataIntegrity, Toast.LENGTH_SHORT).show();
+                            }
+                            else if (corpsErreur.contains("UsernameAlreadyTaken")) {
+                                Toast.makeText(getApplicationContext(),R.string.er_nameDejaPris, Toast.LENGTH_SHORT).show();
+                            }
+                            else{
+                                Toast.makeText(getApplicationContext(),corpsErreur, Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     binding.btnInscription1.setEnabled(true);
                 }
             }
-
             @Override
             public void onFailure(Call<SigninResponse> call, Throwable t) {
+                    String corpsErreur = t.getMessage();
+                    if (corpsErreur!=null) {
+                        if (corpsErreur.contains("Unable to resolve host")) {
+                            Toast.makeText(getApplicationContext(), R.string.er_pasInternet, Toast.LENGTH_LONG).show();
+                        }
+                    }
                 Log.i("RETROFIT",t.getMessage());
                 binding.btnInscription1.setEnabled(true);
             }

@@ -21,6 +21,8 @@ import org.estrada.tp1.transfer.SigninRequest;
 import org.estrada.tp1.transfer.SigninResponse;
 
 
+import java.io.IOException;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -40,7 +42,7 @@ public class Connexion extends AppCompatActivity {
         setContentView(binding.getRoot());
         final LoadingDialog loadingDialog = new LoadingDialog(Connexion.this);
 
-        setTitle("Activité de connexion");
+        setTitle(R.string.activité_co);
 
         nomUsager = binding.NomUtilisateur;
         motPasse = binding.mdp;
@@ -73,22 +75,42 @@ public class Connexion extends AppCompatActivity {
                         public void onResponse(Call<SigninResponse> call, Response<SigninResponse> response) {
                             if(response.isSuccessful()){
                                 Log.i("RETROFIT",response.code()+"");
-                                Toast.makeText(getApplicationContext(),"Connexion réussie", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(),R.string.co_reussie, Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(Connexion.this, Accueil.class));
                                 binding.btnConnexion.setEnabled(true);
                             }
                             else {
                                 // cas d'erreur http 400 404
-                                Log.i("RETROFIT",response.code()+"");
-                                String lol = Log.i("RETROFIT",response.code()+"")+"";
-                                if (!lol.contains("I/RETROFIT: 200")){
-                                    Toast.makeText(getApplicationContext(),lol, Toast.LENGTH_SHORT).show();
+                                try {
+                                    String corpsErreur = response.errorBody().string();
+                                    if (corpsErreur!=null) {
+                                         if (corpsErreur.contains("BadCredentialsException")) {
+                                             Toast.makeText(getApplicationContext(),R.string.er_badCredentials, Toast.LENGTH_SHORT).show();
+                                         }
+                                        else if (corpsErreur.contains("InternalAuthenticationServiceException")) {
+                                            Toast.makeText(getApplicationContext(),R.string.er_internalAuthentification, Toast.LENGTH_SHORT).show();
+                                        }
+                                         else if (corpsErreur.contains("DataIntegrityViolationException")) {
+                                             Toast.makeText(getApplicationContext(),R.string.er_dataIntegrity, Toast.LENGTH_SHORT).show();
+                                         }
+                                         else{
+                                             Toast.makeText(getApplicationContext(),corpsErreur, Toast.LENGTH_SHORT).show();
+                                         }
+                                    }
+                                } catch (IOException e) {
+                                    e.printStackTrace();
                                 }
                                 binding.btnConnexion.setEnabled(true);
                             }
                         }
                         @Override
                         public void onFailure(Call<SigninResponse> call, Throwable t) {
+                            String corpsErreur = t.getMessage();
+                            if (corpsErreur!=null) {
+                                if (corpsErreur.contains("Unable to resolve host")) {
+                                    Toast.makeText(getApplicationContext(), R.string.er_pasInternet, Toast.LENGTH_LONG).show();
+                                }
+                            }
                             Log.i("RETROFIT",t.getMessage());
                             binding.btnConnexion.setEnabled(true);
                         }

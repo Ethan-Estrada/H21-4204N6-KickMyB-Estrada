@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 
 import androidx.annotation.NonNull;
@@ -22,6 +23,7 @@ import org.estrada.tp1.http.RetrofitCookie;
 import org.estrada.tp1.http.ServiceCookie;
 import org.estrada.tp1.transfer.HomeItemResponse;
 
+import java.io.IOException;
 import java.util.List;
 
 import retrofit2.Call;
@@ -43,7 +45,7 @@ public class Accueil extends BaseActivity{
         binding = ActivityAccueilBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
-        setTitle("Activité d'accueil");
+        setTitle(R.string.activité_ac);
         currentActivity= "Accueil";
 
         this.initRecycler();
@@ -85,12 +87,41 @@ public class Accueil extends BaseActivity{
                 }
                 else {
                     // cas d'erreur http 400 404
+                    try {
+                        String statusErreur = response.code()+"";
+                        String corpsErreur = response.errorBody().string();
+                        if (corpsErreur!=null) {
+                            if (corpsErreur.contains("BadCredentialsException")) {
+                                Toast.makeText(getApplicationContext(),R.string.er_badCredentials, Toast.LENGTH_SHORT).show();
+                            }
+                            else if (corpsErreur.contains("InternalAuthenticationServiceException")) {
+                                Toast.makeText(getApplicationContext(),R.string.er_internalAuthentification, Toast.LENGTH_SHORT).show();
+                            }
+                            else if (corpsErreur.contains("DataIntegrityViolationException")) {
+                                Toast.makeText(getApplicationContext(),R.string.er_dataIntegrity, Toast.LENGTH_SHORT).show();
+                            }
+                            else if (statusErreur.contains("403") ) {
+                                Toast.makeText(getApplicationContext(),R.string.er_403, Toast.LENGTH_SHORT).show();
+                            }
+                            else{
+                                Toast.makeText(getApplicationContext(),corpsErreur, Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     Log.i("RETROFIT",response.code()+"");
                 }
             }
             @Override
             public void onFailure(Call<List<HomeItemResponse>> call, Throwable t) {
                 Log.i("RETROFIT",t.getMessage());
+                String corpsErreur = t.getMessage();
+                if (corpsErreur!=null) {
+                    if (corpsErreur.contains("Unable to resolve host")) {
+                        Toast.makeText(getApplicationContext(), R.string.er_pasInternet, Toast.LENGTH_LONG).show();
+                    }
+                }
             }
         });
     }
@@ -112,7 +143,7 @@ public class Accueil extends BaseActivity{
             @Override
             public void onRefresh() {
                 Snackbar snackbar = Snackbar
-                        .make(binding.getRoot(),"Loading ...", 3000);
+                        .make(binding.getRoot(),R.string.loadingfr, 3000);
                 snackbar.show();
 
                 initRecycler();

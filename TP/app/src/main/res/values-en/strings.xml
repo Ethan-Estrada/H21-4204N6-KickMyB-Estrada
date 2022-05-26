@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">TP3</string>
+    <string name="drawer_open">Close me</string>
+    <string name="drawer_closed">Open me</string>
+    <string name="Nom">Name</string>
+    <string name="Pourcentage">Pourcentage</string>
+    <string name="TempsEcoulé">Time elapsed</string>
+    <string name="Date">Deadline</string>
+    <string name="bouton">Boutton</string>
+    <string name="NomTache">Task name</string>
+    <string name="Jours">Days</string>
+    <string name="MettreJour">Update</string>
+    <string name="Creer">Create</string>
+    <string name="nomUtilisateur">Username</string>
+    <string name="Mdp">Password</string>
+    <string name="Inscrire">Register</string>
+    <string name="confirmerMdp">Confirm password</string>
+    <string name="Connexion">Login</string>
+    <string name="Inscription">Registration</string>
+    <string name="Accueil">Accueil</string>
+    <string name="ajoutTache">Homepage</string>
+    <string name="Deconnexion">Logout</string>
+    <string name="id">ID : </string>
+    <string name="id2">ID</string>
+    <string name="mot_de_passe">Password</string>
+</resources>

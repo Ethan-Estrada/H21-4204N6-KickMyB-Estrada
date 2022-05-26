@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.CalendarView;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -16,6 +17,8 @@ import org.estrada.tp1.databinding.ActivityCreationBinding;
 import org.estrada.tp1.http.RetrofitCookie;
 import org.estrada.tp1.http.ServiceCookie;
 import org.estrada.tp1.transfer.AddTaskRequest;
+
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -88,6 +91,29 @@ public class Creation extends BaseActivity{
                         }
                         else {
                             // cas d'erreur http 400 404
+                            try {
+                                String statusErreur = response.code()+"";
+                                String corpsErreur = response.errorBody().string();
+                                if (corpsErreur!=null) {
+                                    if (corpsErreur.contains("Existing")) {
+                                        Toast.makeText(getApplicationContext(),"Le nom de la tache existe déjà", Toast.LENGTH_SHORT).show();
+                                    }
+                                    else if (corpsErreur.contains("InternalAuthenticationServiceException")) {
+                                        Toast.makeText(getApplicationContext(),"Impossible de communiquer avec le serveur", Toast.LENGTH_SHORT).show();
+                                    }
+                                    else if (statusErreur.contains("403") ) {
+                                        Toast.makeText(getApplicationContext(),"l'utilisateur n'est plus authentifié ou a été déconnecté", Toast.LENGTH_SHORT).show();
+                                    }
+                                    else if (corpsErreur.contains("DataIntegrityViolationException")) {
+                                        Toast.makeText(getApplicationContext(),"Les données fournies sont incompatibles avec le serveur", Toast.LENGTH_SHORT).show();
+                                    }
+                                    else{
+                                        Toast.makeText(getApplicationContext(),corpsErreur, Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
                             Log.i("RETROFIT",response.code()+"");
                             binding.btnCreer.setEnabled(true);
                         }
@@ -95,6 +121,12 @@ public class Creation extends BaseActivity{
                     @Override
                     public void onFailure(Call<String> call, Throwable t) {
                         Log.i("RETROFIT",t.getMessage());
+                        String corpsErreur = t.getMessage();
+                        if (corpsErreur!=null) {
+                            if (corpsErreur.contains("Unable to resolve host")) {
+                                Toast.makeText(getApplicationContext(), "Pas de connection internet", Toast.LENGTH_LONG).show();
+                            }
+                        }
                         binding.btnCreer.setEnabled(true);
                     }
                 });
