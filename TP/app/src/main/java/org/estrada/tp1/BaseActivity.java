@@ -42,13 +42,13 @@ public class BaseActivity extends AppCompatActivity {
                 final Intent[] in = new Intent[1];
                 switch (item.getItemId()){
                     case (R.id.menuAccueil):
-                        if (!currentActivity.equals("Accueil")){
+                        if (!currentActivity.equals(R.string.Accueil)){
                             in[0] = new Intent(BaseActivity.this, Accueil.class);
                             startActivity(in[0]);
                             break;
                         }
                     case (R.id.menuAjoutDeTache):
-                        if (!currentActivity.equals("Creation")) {
+                        if (!currentActivity.equals(R.string.Creation)) {
                             in[0] = new Intent(BaseActivity.this, Creation.class);
                             startActivity(in[0]);
                             break;

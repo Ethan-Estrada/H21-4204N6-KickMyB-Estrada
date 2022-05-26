@@ -168,7 +168,7 @@ public class Consultation extends BaseActivity {
                                             Toast.makeText(getApplicationContext(),R.string.er_dataIntegrity, Toast.LENGTH_SHORT).show();
                                         }
                                         else if (statusErreur.contains("403") ) {
-                                            Toast.makeText(getApplicationContext(),"l'utilisateur n'est plus authentifié ou a été déconnecté", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(getApplicationContext(),R.string.er_403, Toast.LENGTH_SHORT).show();
                                         }
                                         else{
                                             Toast.makeText(getApplicationContext(),corpsErreur, Toast.LENGTH_SHORT).show();
@@ -187,7 +187,7 @@ public class Consultation extends BaseActivity {
                             String corpsErreur = t.getMessage();
                             if (corpsErreur!=null) {
                                 if (corpsErreur.contains("Unable to resolve host")) {
-                                    Toast.makeText(getApplicationContext(), "Pas de connection internet", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getApplicationContext(), R.string.er_pasInternet, Toast.LENGTH_LONG).show();
                                 }
                             }
                             binding.btnMettreAJour.setEnabled(true);

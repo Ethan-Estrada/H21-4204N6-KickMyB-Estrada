@@ -46,7 +46,7 @@ public class Accueil extends BaseActivity{
         View view = binding.getRoot();
         setContentView(view);
         setTitle(R.string.activité_ac);
-        currentActivity= "Accueil";
+        currentActivity= String.valueOf(R.string.Accueil);
 
         this.initRecycler();
         loadingDialog.startLoadingDialog();

@@ -20,13 +20,15 @@
     <string name="Inscription">Inscription</string>
     <string name="InscriptionReussie">Inscription réussie !</string>
     <string name="Accueil">Accueil</string>
+    <string name="Creation">Creation</string>
     <string name="ajoutTache">Ajout de tâche</string>
     <string name="Deconnexion">Déconnexion</string>
     <string name="id">ID : </string>
     <string name="id2">ID</string>
-    <string name="loadingfr">Chargement ...</string>
+    <string name="loadingfr">Chargement …</string>
     <string name="mot_de_passe">Mot de passe</string>
-    <string name="activité_ac">Activité d\'accueil</string>
+    <string name="activité_ac">Activité de création</string>
+    <string name="activité_crea">Activité d\'accueil</string>
     <string name="activité_consult">Activité de consultation</string>
     <string name="activité_co">Activité de connexion</string>
     <string name="activité_ins">Activité d\'inscription</string>
@@ -40,4 +42,5 @@
     <string name="er_internalAuthentification">Impossible de communiquer avec le serveur</string>
     <string name="er_dataIntegrity">Les données fournies sont incompatibles avec le serveur</string>
     <string name="er_pasInternet">Pas de connection internet</string>
+    <string name="er_tacheNom">Le nom de la tache existe déjà</string>
 </resources>

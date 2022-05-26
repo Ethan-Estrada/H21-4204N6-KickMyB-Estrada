@@ -43,8 +43,8 @@ public class Creation extends BaseActivity{
         binding = ActivityCreationBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
-        setTitle("Activité de création");
-        currentActivity="Creation";
+        setTitle(R.string.activité_crea);
+        currentActivity= String.valueOf(R.string.Creation);
 
         EditText nomTask = binding.editTache;
         calendarView = (CalendarView) findViewById(R.id.calenderview);
@@ -96,16 +96,16 @@ public class Creation extends BaseActivity{
                                 String corpsErreur = response.errorBody().string();
                                 if (corpsErreur!=null) {
                                     if (corpsErreur.contains("Existing")) {
-                                        Toast.makeText(getApplicationContext(),"Le nom de la tache existe déjà", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getApplicationContext(),R.string.er_tacheNom, Toast.LENGTH_SHORT).show();
                                     }
                                     else if (corpsErreur.contains("InternalAuthenticationServiceException")) {
-                                        Toast.makeText(getApplicationContext(),"Impossible de communiquer avec le serveur", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getApplicationContext(),R.string.er_internalAuthentification, Toast.LENGTH_SHORT).show();
                                     }
                                     else if (statusErreur.contains("403") ) {
-                                        Toast.makeText(getApplicationContext(),"l'utilisateur n'est plus authentifié ou a été déconnecté", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getApplicationContext(),R.string.er_403, Toast.LENGTH_SHORT).show();
                                     }
                                     else if (corpsErreur.contains("DataIntegrityViolationException")) {
-                                        Toast.makeText(getApplicationContext(),"Les données fournies sont incompatibles avec le serveur", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getApplicationContext(),R.string.er_dataIntegrity, Toast.LENGTH_SHORT).show();
                                     }
                                     else{
                                         Toast.makeText(getApplicationContext(),corpsErreur, Toast.LENGTH_SHORT).show();
@@ -124,7 +124,7 @@ public class Creation extends BaseActivity{
                         String corpsErreur = t.getMessage();
                         if (corpsErreur!=null) {
                             if (corpsErreur.contains("Unable to resolve host")) {
-                                Toast.makeText(getApplicationContext(), "Pas de connection internet", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), R.string.er_pasInternet, Toast.LENGTH_LONG).show();
                             }
                         }
                         binding.btnCreer.setEnabled(true);
